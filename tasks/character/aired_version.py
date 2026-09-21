@@ -6,6 +6,7 @@ dict_aired_version = {
     TrailblazerPreservation: "0.0",
     TrailblazerHarmony: "0.0",
     TrailblazerRemembrance: "0.0",
+    TrailblazerElation: "0.0",
 
     # 0.0
     Himeko: "0.0",
@@ -92,6 +93,15 @@ dict_aired_version = {
     TheDahlia: "3.8",
     Sparxie: "4.0",
     YaoGuang: "4.0",
+    Ashveil: "4.1",
+    SilverWolfLV999: "4.2",
+    Evanescia: "4.2",
+    MortenaxBlade: "4.3",
+    HimekoNova: "4.4",
+    RinTohsaka: "4.4",
+    Gilgamesh: "4.4",
+    RobinSummeretto: "4.5",
+    AventurineWaveflair: "4.5",
 }
 
 

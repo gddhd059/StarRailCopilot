@@ -131,7 +131,10 @@ class GitManager(DeployConfig):
     @property
     def goc_client(self):
         client = GitOverCdnClient(
-            url='https://vip.123pan.cn/1815343254/pack/LmeSzinc_StarRailCopilot_master',
+            url=[
+                'https://vip.123pan.cn/1815343254/pack/LmeSzinc_StarRailCopilot_master',
+                'https://1815343254.v.123yx.com/1815343254/pack/LmeSzinc_StarRailCopilot_master'
+            ],
             folder=self.root_filepath,
             source='origin',
             branch='master',
@@ -149,7 +152,7 @@ class GitManager(DeployConfig):
             return
 
         if self.GitOverCdn:
-            if self.goc_client.update(keep_changes=self.KeepLocalChanges):
+            if self.goc_client.update():
                 return
 
         self.git_repository_init(

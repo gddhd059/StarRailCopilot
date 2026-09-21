@@ -32,6 +32,16 @@ ADVERTISE_Cyrene = ButtonWrapper(
         ),
     ],
 )
+ADVERTISE_HimekoNova = ButtonWrapper(
+    name='ADVERTISE_HimekoNova',
+    share=Button(
+        file='./assets/share/login/popup/ADVERTISE_HimekoNova.png',
+        area=(471, 616, 497, 636),
+        search=(451, 596, 517, 656),
+        color=(151, 84, 51),
+        button=(471, 616, 497, 636),
+    ),
+)
 ADVERTISE_Planarcadia = ButtonWrapper(
     name='ADVERTISE_Planarcadia',
     share=Button(
@@ -40,6 +50,16 @@ ADVERTISE_Planarcadia = ButtonWrapper(
         search=(1196, 147, 1268, 220),
         color=(64, 70, 79),
         button=(1216, 167, 1248, 200),
+    ),
+)
+ADVERTISE_SilverWolfLV999 = ButtonWrapper(
+    name='ADVERTISE_SilverWolfLV999',
+    share=Button(
+        file='./assets/share/login/popup/ADVERTISE_SilverWolfLV999.png',
+        area=(489, 618, 510, 639),
+        search=(469, 598, 530, 659),
+        color=(96, 96, 186),
+        button=(489, 618, 510, 639),
     ),
 )
 CLAIM_CHARACTER = ButtonWrapper(

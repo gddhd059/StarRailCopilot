@@ -64,19 +64,6 @@
     "order": 5,
     "color": "#cbe45b"
   },
-  "SimulatedUniverse": {
-    "name": "SimulatedUniverse",
-    "path": "Dungeon.DungeonStorage.SimulatedUniverse",
-    "i18n": "DungeonStorage.SimulatedUniverse.name",
-    "stored": "StoredSimulatedUniverse",
-    "attrs": {
-      "time": "2020-01-01 00:00:00",
-      "total": 0,
-      "value": 0
-    },
-    "order": 6,
-    "color": "#8fb5fe"
-  },
   "Credit": {
     "name": "Credit",
     "path": "DataUpdate.ItemStorage.Credit",
@@ -86,7 +73,7 @@
       "time": "2020-01-01 00:00:00",
       "value": 0
     },
-    "order": 7,
+    "order": 6,
     "color": "#ab7cf2"
   },
   "StallerJade": {
@@ -98,8 +85,20 @@
       "time": "2020-01-01 00:00:00",
       "value": 0
     },
-    "order": 8,
+    "order": 7,
     "color": "#fc8f8b"
+  },
+  "SpecialPass": {
+    "name": "SpecialPass",
+    "path": "DataUpdate.ItemStorage.SpecialPass",
+    "i18n": "ItemStorage.SpecialPass.name",
+    "stored": "StoredInt",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "value": 0
+    },
+    "order": 8,
+    "color": "#ffd700"
   },
   "Item_Credit": {
     "name": "Item_Credit",
@@ -464,6 +463,17 @@
     "order": 0,
     "color": "#777777"
   },
+  "Item_Sneering_Harlequin": {
+    "name": "Item_Sneering_Harlequin",
+    "path": "Dungeon.Planner.Item_Sneering_Harlequin",
+    "i18n": "Planner.Item_Sneering_Harlequin.name",
+    "stored": "StoredPlanner",
+    "attrs": {
+      "time": "2020-01-01 00:00:00"
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "Item_Worldbreaker_Blade": {
     "name": "Item_Worldbreaker_Blade",
     "path": "Dungeon.Planner.Item_Worldbreaker_Blade",
@@ -651,6 +661,39 @@
     "order": 0,
     "color": "#777777"
   },
+  "Item_Omnicolor_Fool_Own": {
+    "name": "Item_Omnicolor_Fool_Own",
+    "path": "Dungeon.Planner.Item_Omnicolor_Fool_Own",
+    "i18n": "Planner.Item_Omnicolor_Fool_Own.name",
+    "stored": "StoredPlanner",
+    "attrs": {
+      "time": "2020-01-01 00:00:00"
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "Item_Cosmic_Sandpit": {
+    "name": "Item_Cosmic_Sandpit",
+    "path": "Dungeon.Planner.Item_Cosmic_Sandpit",
+    "i18n": "Planner.Item_Cosmic_Sandpit.name",
+    "stored": "StoredPlanner",
+    "attrs": {
+      "time": "2020-01-01 00:00:00"
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "Item_Heart_of_Phagousa": {
+    "name": "Item_Heart_of_Phagousa",
+    "path": "Dungeon.Planner.Item_Heart_of_Phagousa",
+    "i18n": "Planner.Item_Heart_of_Phagousa.name",
+    "stored": "StoredPlanner",
+    "attrs": {
+      "time": "2020-01-01 00:00:00"
+    },
+    "order": 0,
+    "color": "#777777"
+  },
   "Item_Tracks_of_Destiny": {
     "name": "Item_Tracks_of_Destiny",
     "path": "Dungeon.Planner.Item_Tracks_of_Destiny",
@@ -743,6 +786,17 @@
     "name": "Item_Vanquished_Flow_Reticence",
     "path": "Dungeon.Planner.Item_Vanquished_Flow_Reticence",
     "i18n": "Planner.Item_Vanquished_Flow_Reticence.name",
+    "stored": "StoredPlanner",
+    "attrs": {
+      "time": "2020-01-01 00:00:00"
+    },
+    "order": 0,
+    "color": "#777777"
+  },
+  "Item_High_Hopes_of_the_Falsely_Enlightened": {
+    "name": "Item_High_Hopes_of_the_Falsely_Enlightened",
+    "path": "Dungeon.Planner.Item_High_Hopes_of_the_Falsely_Enlightened",
+    "i18n": "Planner.Item_High_Hopes_of_the_Falsely_Enlightened.name",
     "stored": "StoredPlanner",
     "attrs": {
       "time": "2020-01-01 00:00:00"
@@ -1142,5 +1196,18 @@
     },
     "order": 0,
     "color": "#777777"
+  },
+  "SimulatedUniverse": {
+    "name": "SimulatedUniverse",
+    "path": "Rogue.RogueStorage.SimulatedUniverse",
+    "i18n": "RogueStorage.SimulatedUniverse.name",
+    "stored": "StoredSimulatedUniverse",
+    "attrs": {
+      "time": "2020-01-01 00:00:00",
+      "total": 0,
+      "value": 0
+    },
+    "order": 0,
+    "color": "#8fb5fe"
   }
 }

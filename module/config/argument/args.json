@@ -87,6 +87,7 @@
           "LDPlayer3",
           "LDPlayer4",
           "LDPlayer9",
+          "LDPlayer14",
           "MuMuPlayer",
           "MuMuPlayerX",
           "MuMuPlayer12",
@@ -412,6 +413,12 @@
         "display": "display",
         "stored": "StoredPlanner"
       },
+      "Item_Sneering_Harlequin": {
+        "type": "planner",
+        "value": {},
+        "display": "display",
+        "stored": "StoredPlanner"
+      },
       "Item_Worldbreaker_Blade": {
         "type": "planner",
         "value": {},
@@ -514,6 +521,24 @@
         "display": "display",
         "stored": "StoredPlanner"
       },
+      "Item_Omnicolor_Fool_Own": {
+        "type": "planner",
+        "value": {},
+        "display": "display",
+        "stored": "StoredPlanner"
+      },
+      "Item_Cosmic_Sandpit": {
+        "type": "planner",
+        "value": {},
+        "display": "display",
+        "stored": "StoredPlanner"
+      },
+      "Item_Heart_of_Phagousa": {
+        "type": "planner",
+        "value": {},
+        "display": "display",
+        "stored": "StoredPlanner"
+      },
       "Item_Tracks_of_Destiny": {
         "type": "planner",
         "value": {},
@@ -563,6 +588,12 @@
         "stored": "StoredPlanner"
       },
       "Item_Vanquished_Flow_Reticence": {
+        "type": "planner",
+        "value": {},
+        "display": "display",
+        "stored": "StoredPlanner"
+      },
+      "Item_High_Hopes_of_the_Falsely_Enlightened": {
         "type": "planner",
         "value": {},
         "display": "display",
@@ -656,6 +687,15 @@
         "display": "hide",
         "option": [
           "_none_",
+          "RobinSummeretto",
+          "AventurineWaveflair",
+          "HimekoNova",
+          "RinTohsaka",
+          "Gilgamesh",
+          "MortenaxBlade",
+          "SilverWolfLV999",
+          "Evanescia",
+          "Ashveil",
           "Sparxie",
           "YaoGuang",
           "TheDahlia",
@@ -718,6 +758,7 @@
           "TrailblazerPreservation",
           "TrailblazerHarmony",
           "TrailblazerRemembrance",
+          "TrailblazerElation",
           "Himeko",
           "Welt",
           "Gepard",
@@ -747,6 +788,13 @@
         "display": "hide",
         "option": [
           "_none_",
+          "Summer_Rides_the_Surf",
+          "Rise_and_Sing",
+          "A_Star_That_Lights_the_Night",
+          "Reforged_in_Hellfire",
+          "Until_the_Flowers_Bloom_Again",
+          "Welcome_to_the_Cosmic_City",
+          "The_Finale_of_a_Lie",
           "When_She_Decided_to_See",
           "Dazzled_by_a_Flowery_World",
           "This_Love_Forever",
@@ -793,12 +841,15 @@
           "Incessant_Rain",
           "Patience_Is_All_You_Need",
           "In_the_Night",
+          "Elation_Brimming_With_Blessings",
           "Memory_Curtain_Never_Falls",
           "Eternal_Calculus",
           "Solitary_Healing",
           "Texture_of_Memories",
           "Cruising_in_the_Stellar_Sea",
           "On_the_Fall_of_an_Aeon",
+          "I_Am_As_You_Behold",
+          "Flickering_Stars",
           "The_Hell_Where_Ideals_Burn",
           "A_Thankless_Coronation",
           "Time_Waits_for_No_One",
@@ -808,6 +859,8 @@
           "But_the_Battle_Isn_t_Over",
           "Something_Irreplaceable",
           "Night_on_the_Milky_Way",
+          "Race_to_the_Horizon",
+          "Tomorrow_Together",
           "Fly_Into_a_Pink_Tomorrow",
           "The_Forever_Victual",
           "The_Great_Cosmic_Enterprise",
@@ -815,6 +868,7 @@
           "For_Tomorrow_Journey",
           "Hey_Over_Here",
           "Before_the_Tutorial_Mission_Starts",
+          "A_Little_Getaway",
           "Today_Good_Luck",
           "Mushy_Shroomy_Adventures",
           "See_You_at_the_End",
@@ -912,6 +966,7 @@
         "display": "hide",
         "option": [
           "_none_",
+          "Cavern_of_Corrosion_Path_of_Insight",
           "Cavern_of_Corrosion_Path_of_Possession",
           "Cavern_of_Corrosion_Path_of_Hidden_Salvation",
           "Cavern_of_Corrosion_Path_of_Thundersurge",
@@ -936,6 +991,8 @@
         "display": "hide",
         "option": [
           "_none_",
+          "Divergent_Universe_Bugs_Incoming",
+          "Divergent_Universe_Gilded_Recollection",
           "Divergent_Universe_Within_the_West_Wind",
           "Divergent_Universe_Moonlit_Blood",
           "Divergent_Universe_Unceasing_Strife",
@@ -1091,6 +1148,7 @@
         "type": "select",
         "value": "Calyx_Golden_Treasures_Jarilo_VI",
         "option": [
+          "Cavern_of_Corrosion_Path_of_Insight",
           "Cavern_of_Corrosion_Path_of_Possession",
           "Cavern_of_Corrosion_Path_of_Hidden_Salvation",
           "Cavern_of_Corrosion_Path_of_Thundersurge",
@@ -1123,6 +1181,7 @@
           "Calyx_Golden_Treasures_Jarilo_VI",
           "Calyx_Crimson_Destruction_Herta_StorageZone",
           "Calyx_Crimson_Destruction_Luofu_ScalegorgeWaterscape",
+          "Calyx_Crimson_Destruction_Planarcadia_InkfordHermitage",
           "Calyx_Crimson_Preservation_Herta_SupplyZone",
           "Calyx_Crimson_Preservation_Penacony_ClockStudiosThemePark",
           "Calyx_Crimson_The_Hunt_Jarilo_OutlyingSnowPlains",
@@ -1132,10 +1191,12 @@
           "Calyx_Crimson_Abundance_Luofu_FyxestrollGarden",
           "Calyx_Crimson_Erudition_Jarilo_RivetTown",
           "Calyx_Crimson_Erudition_Penacony_PenaconyGrandTheater",
+          "Calyx_Crimson_Erudition_Planarcadia_SeafeldTVTower",
           "Calyx_Crimson_Harmony_Jarilo_RobotSettlement",
           "Calyx_Crimson_Harmony_Penacony_TheReverieDreamscape",
           "Calyx_Crimson_Nihility_Jarilo_GreatMine",
           "Calyx_Crimson_Nihility_Luofu_AlchemyCommission",
+          "Calyx_Crimson_Nihility_Amphoreus_RadiantScarwoodGroveofEpiphany",
           "Calyx_Crimson_Remembrance_Amphoreus_StrifeRuinsCastrumKremnos",
           "Calyx_Crimson_Elation_Planarcadia_WorldEndTavern",
           "Stagnant_Shadow_Spike",
@@ -1154,6 +1215,7 @@
           "Stagnant_Shadow_Fulmination",
           "Stagnant_Shadow_Doom",
           "Stagnant_Shadow_Mechwolf",
+          "Stagnant_Shadow_Soundburst",
           "Stagnant_Shadow_Gust",
           "Stagnant_Shadow_Celestial",
           "Stagnant_Shadow_Gloam",
@@ -1161,6 +1223,7 @@
           "Stagnant_Shadow_Quanta",
           "Stagnant_Shadow_Abomination",
           "Stagnant_Shadow_Gelidmoon",
+          "Stagnant_Shadow_Devour",
           "Stagnant_Shadow_Mirage",
           "Stagnant_Shadow_Puppetry",
           "Stagnant_Shadow_Timbre",
@@ -1169,8 +1232,9 @@
       },
       "NameAtDoubleCalyx": {
         "type": "select",
-        "value": "Calyx_Golden_Treasures_Jarilo_VI",
+        "value": "do_not_use",
         "option": [
+          "do_not_use",
           "Calyx_Golden_Memories_Planarcadia",
           "Calyx_Golden_Memories_Amphoreus",
           "Calyx_Golden_Memories_Penacony",
@@ -1188,6 +1252,7 @@
           "Calyx_Golden_Treasures_Jarilo_VI",
           "Calyx_Crimson_Destruction_Herta_StorageZone",
           "Calyx_Crimson_Destruction_Luofu_ScalegorgeWaterscape",
+          "Calyx_Crimson_Destruction_Planarcadia_InkfordHermitage",
           "Calyx_Crimson_Preservation_Herta_SupplyZone",
           "Calyx_Crimson_Preservation_Penacony_ClockStudiosThemePark",
           "Calyx_Crimson_The_Hunt_Jarilo_OutlyingSnowPlains",
@@ -1197,18 +1262,22 @@
           "Calyx_Crimson_Abundance_Luofu_FyxestrollGarden",
           "Calyx_Crimson_Erudition_Jarilo_RivetTown",
           "Calyx_Crimson_Erudition_Penacony_PenaconyGrandTheater",
+          "Calyx_Crimson_Erudition_Planarcadia_SeafeldTVTower",
           "Calyx_Crimson_Harmony_Jarilo_RobotSettlement",
           "Calyx_Crimson_Harmony_Penacony_TheReverieDreamscape",
           "Calyx_Crimson_Nihility_Jarilo_GreatMine",
           "Calyx_Crimson_Nihility_Luofu_AlchemyCommission",
+          "Calyx_Crimson_Nihility_Amphoreus_RadiantScarwoodGroveofEpiphany",
           "Calyx_Crimson_Remembrance_Amphoreus_StrifeRuinsCastrumKremnos",
           "Calyx_Crimson_Elation_Planarcadia_WorldEndTavern"
         ]
       },
       "NameAtDoubleRelic": {
         "type": "select",
-        "value": "Cavern_of_Corrosion_Path_of_Providence",
+        "value": "do_not_use",
         "option": [
+          "do_not_use",
+          "Cavern_of_Corrosion_Path_of_Insight",
           "Cavern_of_Corrosion_Path_of_Possession",
           "Cavern_of_Corrosion_Path_of_Hidden_Salvation",
           "Cavern_of_Corrosion_Path_of_Thundersurge",
@@ -1259,6 +1328,15 @@
         "value": "FirstCharacter",
         "option": [
           "FirstCharacter",
+          "RobinSummeretto",
+          "AventurineWaveflair",
+          "HimekoNova",
+          "RinTohsaka",
+          "Gilgamesh",
+          "MortenaxBlade",
+          "SilverWolfLV999",
+          "Evanescia",
+          "Ashveil",
           "Sparxie",
           "YaoGuang",
           "TheDahlia",
@@ -1321,6 +1399,7 @@
           "TrailblazerPreservation",
           "TrailblazerHarmony",
           "TrailblazerRemembrance",
+          "TrailblazerElation",
           "Himeko",
           "Welt",
           "Gepard",
@@ -1393,14 +1472,6 @@
         "display": "hide",
         "stored": "StoredEchoOfWar"
       },
-      "SimulatedUniverse": {
-        "type": "stored",
-        "value": {},
-        "display": "hide",
-        "stored": "StoredSimulatedUniverse",
-        "order": 6,
-        "color": "#8fb5fe"
-      },
       "Relic": {
         "type": "stored",
         "value": {},
@@ -1460,6 +1531,8 @@
         "type": "select",
         "value": "Divergent_Universe_Eternal_Comedy",
         "option": [
+          "Divergent_Universe_Bugs_Incoming",
+          "Divergent_Universe_Gilded_Recollection",
           "Divergent_Universe_Within_the_West_Wind",
           "Divergent_Universe_Moonlit_Blood",
           "Divergent_Universe_Unceasing_Strife",
@@ -1532,6 +1605,15 @@
         "value": "FirstCharacter",
         "option": [
           "FirstCharacter",
+          "RobinSummeretto",
+          "AventurineWaveflair",
+          "HimekoNova",
+          "RinTohsaka",
+          "Gilgamesh",
+          "MortenaxBlade",
+          "SilverWolfLV999",
+          "Evanescia",
+          "Ashveil",
           "Sparxie",
           "YaoGuang",
           "TheDahlia",
@@ -1594,6 +1676,7 @@
           "TrailblazerPreservation",
           "TrailblazerHarmony",
           "TrailblazerRemembrance",
+          "TrailblazerElation",
           "Himeko",
           "Welt",
           "Gepard",
@@ -1985,7 +2068,7 @@
         "value": {},
         "display": "display",
         "stored": "StoredInt",
-        "order": 7,
+        "order": 6,
         "color": "#ab7cf2"
       },
       "StallerJade": {
@@ -1993,8 +2076,16 @@
         "value": {},
         "display": "display",
         "stored": "StoredInt",
-        "order": 8,
+        "order": 7,
         "color": "#fc8f8b"
+      },
+      "SpecialPass": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredInt",
+        "order": 8,
+        "color": "#ffd700"
       }
     },
     "CloudStorage": {
@@ -2093,9 +2184,10 @@
     "Weekly": {
       "Name": {
         "type": "select",
-        "value": "Echo_of_War_Rusted_Crypt_of_the_Iron_Carcass",
+        "value": "Echo_of_War_The_Comedy_of_Doom",
         "options": [],
         "option": [
+          "Echo_of_War_The_Comedy_of_Doom",
           "Echo_of_War_Rusted_Crypt_of_the_Iron_Carcass",
           "Echo_of_War_Glance_of_Twilight",
           "Echo_of_War_Inner_Beast_Battlefield",
@@ -2136,6 +2228,15 @@
         "value": "FirstCharacter",
         "option": [
           "FirstCharacter",
+          "RobinSummeretto",
+          "AventurineWaveflair",
+          "HimekoNova",
+          "RinTohsaka",
+          "Gilgamesh",
+          "MortenaxBlade",
+          "SilverWolfLV999",
+          "Evanescia",
+          "Ashveil",
           "Sparxie",
           "YaoGuang",
           "TheDahlia",
@@ -2198,6 +2299,7 @@
           "TrailblazerPreservation",
           "TrailblazerHarmony",
           "TrailblazerRemembrance",
+          "TrailblazerElation",
           "Himeko",
           "Welt",
           "Gepard",
@@ -2329,6 +2431,15 @@
         "value": "",
         "keepvalue": true,
         "display": "hide"
+      }
+    },
+    "RogueStorage": {
+      "SimulatedUniverse": {
+        "type": "stored",
+        "value": {},
+        "display": "display",
+        "stored": "StoredSimulatedUniverse",
+        "color": "#8fb5fe"
       }
     },
     "RogueBlessing": {

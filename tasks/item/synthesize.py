@@ -4,7 +4,7 @@ import numpy as np
 import module.config.server as server
 from module.base.decorator import cached_property
 from module.base.timer import Timer
-from module.base.utils import SelectedGrids, color_similarity_2d, crop, image_size, rgb2luma
+from module.base.utils import SelectedGrids, color_mask, crop, image_size, rgb2luma
 from module.exception import ScriptError
 from module.logger import logger
 from module.ocr.ocr import Digit, Ocr
@@ -29,17 +29,24 @@ RARITY_COLOR = {
 }
 
 
-def image_color_count(image, color, threshold=221):
-    mask = color_similarity_2d(image, color=color)
-    cv2.inRange(mask, threshold, 255, dst=mask)
+def image_color_count(image, color, threshold=30):
+    """
+    Args:
+        image:
+        color (tuple): RGB.
+        threshold (int): 0-255, 0 means colors are the same, the higher the worse.
+
+    Returns:
+        int: Pixels count.
+    """
+    mask = color_mask(image, color=color, threshold=threshold)
     sum_ = cv2.countNonZero(mask)
     return sum_
 
 
 class WhiteStrip(Ocr):
     def pre_process(self, image):
-        mask = color_similarity_2d(image, color=(255, 255, 255))
-        mask = cv2.inRange(mask, 160, 255, dst=mask)
+        mask = color_mask(image, color=(255, 255, 255), threshold=95)
 
         mask = np.mean(mask, axis=0)
         try:
@@ -136,7 +143,7 @@ class Synthesize(CombatObtain, ItemUI, SynthesizeUI):
         # Must contain 30% target color at icon bottom
         minimum = x2 * (y2 - y1) * 0.3
         for rarity, color in RARITY_COLOR.items():
-            count = image_color_count(image, color=color, threshold=221)
+            count = image_color_count(image, color=color, threshold=30)
             # print(rarity, count, minimum)
             if count > minimum:
                 return rarity
@@ -152,15 +159,32 @@ class Synthesize(CombatObtain, ItemUI, SynthesizeUI):
         Pages:
             in: page_synthesize
         """
+        match_result = {}
+        def get_similarity(button_asset):
+            image = crop(self.device.image, button_asset.search, copy=False)
+            image = rgb2luma(image)
+            for b in button_asset.buttons:
+                res = cv2.matchTemplate(b.image_luma, image, cv2.TM_CCOEFF_NORMED)
+                _, sim, _, _ = cv2.minMaxLoc(res)
+                if sim > 0.7:
+                    match_result[button_asset] = sim
+                    return sim
+        # match two buttons, return the one with greater similarity
+        # because ENTRY_ITEM_USE9 matches "/9" may have mis-detection on normal amount letters
+        get_similarity(ENTRY_ITEM_USE9)
+        get_similarity(ENTRY_ITEM_USE3)
+        best_button = max(match_result, key=match_result.get) if match_result else None
+
         # 2025.02.26, Since 3.1 purple items can be auto synthesized from blue and green at one time
         # Having two items -> synthesizing purple item
         rarity = self._item_get_rarity_from_button(ENTRY_ITEM_FROM_LEFT)
         # When having 2 items, left is blue and right is green. This indicates synthesizing purple.
-        if rarity == 'blue':
+        # check best_button also, maybe one item at the middle and random blue background detected as purple (LEFT)
+        if rarity == 'blue' and best_button is None:
             # must have white letter below to avoid mis-detection on blue background
             area = ENTRY_ITEM_FROM_LEFT.area
             area = (area[0], area[3], area[2], area[3] + 30)
-            if self.image_color_count(area, color=(255, 255, 255), threshold=221, count=30):
+            if self.image_color_count(area, color=(255, 255, 255), threshold=30, count=30):
                 logger.attr('SynthesizeRarity', 'purple (LEFT)')
                 return 'purple'
         # Check item in the middle
@@ -169,24 +193,7 @@ class Synthesize(CombatObtain, ItemUI, SynthesizeUI):
             # Blue material appears -> synthesizing purple
             logger.attr('SynthesizeRarity', 'purple (MIDDLE)')
             return 'purple'
-        elif rarity == 'green':
-            match_result = {}
-
-            def get_similarity(button_asset):
-                image = crop(self.device.image, button_asset.search, copy=False)
-                image = rgb2luma(image)
-                for b in button_asset.buttons:
-                    res = cv2.matchTemplate(b.image_luma, image, cv2.TM_CCOEFF_NORMED)
-                    _, sim, _, _ = cv2.minMaxLoc(res)
-                    if sim > 0.7:
-                        match_result[button_asset] = sim
-                        return sim
-
-            # match two buttons, return the one with greater similarity
-            # because ENTRY_ITEM_USE9 matches "/9" may have mis-detection on normal ammount letters
-            get_similarity(ENTRY_ITEM_USE9)
-            get_similarity(ENTRY_ITEM_USE3)
-            best_button = max(match_result, key=match_result.get) if match_result else None
+        if rarity == 'green':
             # If middle item is green, it could be purple or blue item being synthesized
             # USE9: cost of green to purple
             if best_button == ENTRY_ITEM_USE9:
@@ -196,6 +203,20 @@ class Synthesize(CombatObtain, ItemUI, SynthesizeUI):
             if best_button == ENTRY_ITEM_USE3:
                 logger.attr('SynthesizeRarity', 'blue (USE3)')
                 return 'blue'
+
+        # try to get from item name
+        ocr = SynthesizeItemName(ITEM_NAME)
+        item = ocr.matched_single_line(self.device.image, keyword_classes=ITEM_CLASSES)
+        if item is not None:
+            try:
+                if item.is_rarity_purple:
+                    logger.attr('SynthesizeRarity', 'purple (OCR)')
+                    return 'purple'
+                if item.is_rarity_blue:
+                    logger.attr('SynthesizeRarity', 'blue (OCR)')
+                    return 'blue'
+            except AttributeError:
+                pass
 
         logger.attr('SynthesizeRarity', None)
         return None
@@ -503,10 +524,10 @@ class Synthesize(CombatObtain, ItemUI, SynthesizeUI):
         self.interval_clear([SYNTHESIZE_CONFIRM, page_synthesize.check_button])
 
         def appear_confirm():
-            return self.image_color_count(SYNTHESIZE_CONFIRM, color=(226, 229, 232), threshold=221, count=1000)
+            return self.image_color_count(SYNTHESIZE_CONFIRM, color=(226, 229, 232), threshold=30, count=1000)
 
         def appear_insufficient():
-            return self.image_color_count(SYNTHESIZE_INSUFFICIENT, color=(172, 95, 87), threshold=221, count=5000)
+            return self.image_color_count(SYNTHESIZE_INSUFFICIENT, color=(172, 95, 87), threshold=30, count=5000)
 
         # SYNTHESIZE_CONFIRM -> reward_appear
         while 1:

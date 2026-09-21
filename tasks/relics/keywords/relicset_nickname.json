@@ -419,6 +419,34 @@
     "jp": "卜者",
     "es": "Adivino"
   },
+  "AsNavigatorIseeSeesIt": {
+    "setid": 131,
+    "dungeon_id": 1216,
+    "cn_origin": "星如我见的领航员",
+    "cht_origin": "星如我見的領航員",
+    "en_origin": "As Navigator Isee Sees It",
+    "jp_origin": "星巡るナビゲーター「シケン」",
+    "es_origin": "Piloto estelar como Yoveo",
+    "cn": "领航员",
+    "cht": "領航員",
+    "en": "Navigator",
+    "jp": "ナビゲーター",
+    "es": "Piloto estelar"
+  },
+  "DivineQueryingMasterSmith": {
+    "setid": 132,
+    "dungeon_id": 1216,
+    "cn_origin": "叩问天工的名冶",
+    "cht_origin": "叩問天工的名冶",
+    "en_origin": "Divine-Querying Master Smith",
+    "jp_origin": "神業を探求する名匠",
+    "es_origin": "Gran forja del interrogante divino",
+    "cn": "名冶",
+    "cht": "名冶",
+    "en": "Master Smith",
+    "jp": "名匠",
+    "es": "Gran forja"
+  },
   "SpaceSealingStation": {
     "setid": 301,
     "dungeon_id": 230,
@@ -754,5 +782,61 @@
     "en": "Tengoku",
     "jp": "天国",
     "es": "Tengoku"
+  },
+  "PunklordeStageZero": {
+    "setid": 325,
+    "dungeon_id": 350,
+    "cn_origin": "零号关卡朋克洛德",
+    "cht_origin": "零號關卡龐克洛德",
+    "en_origin": "Punklorde Stage Zero",
+    "jp_origin": "ステージゼロ：パンクロード",
+    "es_origin": "Etapa cero de Punklorde",
+    "cn": "朋克洛德",
+    "cht": "龐克洛德",
+    "en": "Punklorde",
+    "jp": "パンクロード",
+    "es": "Punklorde"
+  },
+  "CityofConvergingStars": {
+    "setid": 326,
+    "dungeon_id": 350,
+    "cn_origin": "千星荟萃之城",
+    "cht_origin": "千星薈萃之城",
+    "en_origin": "City of Converging Stars",
+    "jp_origin": "千の星が集う街",
+    "es_origin": "Ciudad de las mil estrellas",
+    "cn": "千星荟萃",
+    "cht": "千星薈萃",
+    "en": "Converging Stars",
+    "jp": "千の星が集",
+    "es": "Las mil estrellas"
+  },
+  "FallenStarAnchorage": {
+    "setid": 327,
+    "dungeon_id": 360,
+    "cn_origin": "坠星启航地",
+    "cht_origin": "墜星啟航地",
+    "en_origin": "Fallen Star Anchorage",
+    "jp_origin": "墜星の出航地",
+    "es_origin": "Punto de partida de la estrella caída",
+    "cn": "坠星",
+    "cht": "墜星",
+    "en": "Fallen Star",
+    "jp": "墜星",
+    "es": "Punto de partida de la estrella caída"
+  },
+  "CosmicLifeSciencesInstitute": {
+    "setid": 328,
+    "dungeon_id": 360,
+    "cn_origin": "寰宇生研院",
+    "cht_origin": "寰宇生研院",
+    "en_origin": "Cosmic Life Sciences Institute",
+    "jp_origin": "宇宙生命科学研究院",
+    "es_origin": "Instituto de Ciencias de la Vida Cósmica",
+    "cn": "寰宇",
+    "cht": "寰宇",
+    "en": "Cosmic Life",
+    "jp": "宇宙生命",
+    "es": "Vida Cósmica"
   }
 }

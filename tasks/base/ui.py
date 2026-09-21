@@ -319,11 +319,11 @@ class UI(MainPage):
 
         appear = False
         if MAIN_GOTO_CHARACTER.match_template_luma(self.device.image):
-            if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=234, count=400):
+            if self.image_color_count(MAIN_GOTO_CHARACTER, color=(235, 235, 235), threshold=21, count=400):
                 appear = True
         if not appear:
             if MAP_EXIT.match_template_luma(self.device.image):
-                if self.image_color_count(MAP_EXIT, color=(235, 235, 235), threshold=221, count=50):
+                if self.image_color_count(MAP_EXIT, color=(235, 235, 235), threshold=30, count=50):
                     appear = True
 
         if appear and interval:
@@ -332,6 +332,8 @@ class UI(MainPage):
         return appear
 
     def is_in_login_confirm(self, interval=0):
+        # since 4.2, LOGIN_CONFIRM checks the "Setting" button at login page
+        # because both downloading page and login page has "Notice" button
         self.device.stuck_record_add(LOGIN_CONFIRM)
 
         if interval and not self.interval_is_reached(LOGIN_CONFIRM, interval=interval):
@@ -352,10 +354,10 @@ class UI(MainPage):
 
         appear = False
         if MAP_EXIT.match_template_luma(self.device.image):
-            if self.image_color_count(MAP_EXIT, color=(235, 235, 235), threshold=221, count=50):
+            if self.image_color_count(MAP_EXIT, color=(235, 235, 235), threshold=30, count=50):
                 appear = True
         if MAP_EXIT_OE.match_template_luma(self.device.image):
-            if self.image_color_count(MAP_EXIT_OE, color=(235, 235, 235), threshold=221, count=50):
+            if self.image_color_count(MAP_EXIT_OE, color=(235, 235, 235), threshold=30, count=50):
                 appear = True
 
         if appear and interval:

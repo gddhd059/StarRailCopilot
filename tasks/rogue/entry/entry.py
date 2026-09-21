@@ -1,11 +1,10 @@
 import re
 from datetime import datetime, timedelta
 
-import cv2
 import numpy as np
 
 from module.base.timer import Timer
-from module.base.utils import color_similarity_2d
+from module.base.utils import color_mask
 from module.exception import RequestHumanTakeover, ScriptError
 from module.logger import logger
 from module.ocr.ocr import Ocr
@@ -16,20 +15,10 @@ from tasks.dungeon.keywords import DungeonList
 from tasks.dungeon.keywords.dungeon import Simulated_Universe_World_1
 from tasks.dungeon.ui.state import OcrSimUniPoint
 from tasks.dungeon.ui.ui_rogue import DungeonRogueUI
-from tasks.rogue.assets.assets_rogue_entry import (
-    LEVEL_CONFIRM,
-    OCR_WEEKLY_POINT,
-    OCR_WORLD,
-    THEME_DLC,
-    THEME_ROGUE,
-    THEME_SWITCH,
-    WORLD_ENTER,
-    WORLD_NEXT,
-    WORLD_PREV
-)
+from tasks.rogue.assets.assets_rogue_entry import *
 from tasks.rogue.assets.assets_rogue_path import CONFIRM_PATH
 from tasks.rogue.assets.assets_rogue_ui import ROGUE_LAUNCH
-from tasks.rogue.assets.assets_rogue_weekly import REWARD_CLOSE, REWARD_ENTER
+from tasks.rogue.assets.assets_rogue_weekly import REWARD_CLOSE, REWARD_ENTER, REWARD_MESSAGE
 from tasks.rogue.entry.path import RoguePathHandler
 from tasks.rogue.entry.weekly import RogueRewardHandler
 from tasks.rogue.exception import RogueReachedWeeklyPointLimit
@@ -73,8 +62,7 @@ class OcrRogueWorld(Ocr):
     def pre_process(self, image):
         # Letter randomly moving up and down
         # Crop to the up/down border of the white letter
-        center = color_similarity_2d(image, color=(255, 255, 255))
-        cv2.inRange(center, 180, 255, dst=center)
+        center = color_mask(image, color=(255, 255, 255), threshold=75)
         # print(np.count_nonzero(center, axis=1))
         # World 8
         # [ 0  0  0  0  0  0  0  2 23 24 22 21 23 29 44 47 38 37 31 32 33 33 31 34
@@ -125,44 +113,45 @@ class RogueEntry(RouteBase, RogueRewardHandler, RoguePathHandler, DungeonRogueUI
                 continue
 
             if self.is_page_rogue_main() \
-                    and self.image_color_count(OCR_WORLD, color=(255, 255, 255), threshold=221, count=50):
+                    and self.image_color_count(OCR_WORLD, color=(255, 255, 255), threshold=30, count=50):
                 current = ocr.ocr_single_line(self.device.image)
                 if current:
                     break
 
-    def _rogue_theme_set(self, world: DungeonList, skip_first_screenshot=True):
+    def _rogue_theme_get(self):
+        for button in [
+            THEME_ROGUE,
+            THEME_Swarm_Disaster,
+            THEME_Gold_and_Gears,
+            THEME_Unknowable_Domain,
+        ]:
+            if self.appear(button):
+                return button
+        return None
+
+    def _rogue_theme_set(self, world: DungeonList):
         """
         Args:
             world: KEYWORDS_DUNGEON_LIST.Simulated_Universe_World_7
-            skip_first_screenshot:
 
         Pages:
             in: is_page_rogue_main()
         """
         logger.info(f'Rogue theme set: {world.rogue_theme}')
-        if world.rogue_theme == 'rogue':
-            check_button = THEME_ROGUE
-        elif world.rogue_theme == 'dlc':
-            check_button = THEME_DLC
-        else:
-            logger.warning(f'Invalid rogue theme: {world}')
-            raise RequestHumanTakeover
 
-        interval = Timer(2, count=10)
-        while 1:
-            if skip_first_screenshot:
-                skip_first_screenshot = False
-            else:
-                self.device.screenshot()
-
+        interval = Timer(3, count=10)
+        for _ in self.loop():
             # End
-            if self.appear(check_button):
-                logger.info(f'At theme {world.rogue_theme}')
+            theme = self._rogue_theme_get()
+            logger.attr('RogueTheme', theme)
+            if theme == THEME_ROGUE:
+                logger.info(f'At theme {theme}')
                 break
             # Click
-            if interval.reached() and self.is_page_rogue_main():
+            if theme is not None and interval.reached():
                 self.device.click(THEME_SWITCH)
                 interval.reset()
+                continue
             # Weekly refresh popup
             if self.appear_then_click(REWARD_CLOSE, interval=2):
                 continue
@@ -206,7 +195,7 @@ class RogueEntry(RouteBase, RogueRewardHandler, RoguePathHandler, DungeonRogueUI
                 continue
 
             if self.is_page_rogue_main() \
-                    and self.image_color_count(OCR_WORLD, color=(255, 255, 255), threshold=221, count=50):
+                    and self.image_color_count(OCR_WORLD, color=(255, 255, 255), threshold=30, count=50):
                 current = ocr.ocr_single_line(self.device.image)
                 if not current:
                     continue
@@ -257,7 +246,7 @@ class RogueEntry(RouteBase, RogueRewardHandler, RoguePathHandler, DungeonRogueUI
                 self.interval_reset(REWARD_ENTER, interval=2)
                 continue
             if self.match_template_color(LEVEL_CONFIRM, interval=2):
-                if not self.image_color_count(LEVEL_CONFIRM, color=(223, 223, 225), threshold=240, count=50):
+                if not self.image_color_count(LEVEL_CONFIRM, color=(223, 223, 225), threshold=15, count=50):
                     self.interval_clear(LEVEL_CONFIRM)
                     continue
                 self.update_stamina_status()
@@ -426,15 +415,20 @@ class RogueEntry(RouteBase, RogueRewardHandler, RoguePathHandler, DungeonRogueUI
         self._rogue_theme_set(world)
         self._rogue_world_wait()
 
-        # Update rogue points
-        if datetime.now() - self.config.stored.SimulatedUniverse.time > timedelta(minutes=2):
-            ocr = OcrSimUniPoint(OCR_WEEKLY_POINT)
-            value, _, total = ocr.ocr_single_line(self.device.image)
-            if total and value <= total:
-                logger.attr('SimulatedUniverse', f'{value}/{total}')
-                self.config.stored.SimulatedUniverse.set(value, total)
-            else:
-                logger.warning(f'Invalid SimulatedUniverse points: {value}/{total}')
+        if self.match_template_color(REWARD_MESSAGE):
+            logger.info(f'Rogue reward is {REWARD_MESSAGE}, delay to tomorrow')
+            self.config.task_delay(server_update=True)
+            self.config.task_stop()
+        else:
+            # Update rogue points
+            if datetime.now() - self.config.stored.SimulatedUniverse.time > timedelta(minutes=2):
+                ocr = OcrSimUniPoint(OCR_WEEKLY_POINT)
+                value, _, total = ocr.ocr_single_line(self.device.image)
+                if total and value <= total:
+                    logger.attr('SimulatedUniverse', f'{value}/{total}')
+                    self.config.stored.SimulatedUniverse.set(value, total)
+                else:
+                    logger.warning(f'Invalid SimulatedUniverse points: {value}/{total}')
 
         self.rogue_reward_claim()
         # Check stop condition again as weekly reward updated
